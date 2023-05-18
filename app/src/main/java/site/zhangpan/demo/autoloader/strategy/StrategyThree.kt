@@ -1,4 +1,4 @@
-package site.zhangpan.demo.autoloader.stratety
+package site.zhangpan.demo.autoloader.strategy
 
 import android.util.Log
 import site.zhangpan.autoloader.annotation.AutoLoader
@@ -10,12 +10,12 @@ import site.zhangpan.autoloader.annotation.AutoLoader
  * @Email: zhpanvip@outlook.com
  */
 @AutoLoader(IStrategy::class)
-class StrategyOne: IStrategy {
+class StrategyThree : IStrategy {
     override fun canLoad(): Boolean {
         return true
     }
 
     override fun loadData(list: MutableList<String>) {
-        Log.d("MainActivity","Load First Strategy Data")
+        Log.d("MainActivity", "Load Third Strategy Data")
     }
 }

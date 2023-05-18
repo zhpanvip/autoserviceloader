@@ -3,9 +3,9 @@ package site.zhangpan.demo.autoloader.generate;
 import java.util.ArrayList;
 
 import site.zhangpan.autoloader.IAutoLoadManager;
-import site.zhangpan.demo.autoloader.stratety.StrategyOne;
-import site.zhangpan.demo.autoloader.stratety.StrategyTwo;
-import site.zhangpan.demo.autoloader.stratety.StrategyThree;
+import site.zhangpan.demo.autoloader.strategy.StrategyOne;
+import site.zhangpan.demo.autoloader.strategy.StrategyTwo;
+import site.zhangpan.demo.autoloader.strategy.StrategyThree;
 
 /**
  * @Description:

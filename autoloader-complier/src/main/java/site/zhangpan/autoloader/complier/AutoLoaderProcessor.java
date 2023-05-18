@@ -1,11 +1,13 @@
 package site.zhangpan.autoloader.complier;
 
+import com.google.auto.service.AutoService;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -22,6 +24,7 @@ import site.zhangpan.autoloader.annotation.AutoLoader;
  * @Date: 2023/5/17 16:51
  * @Email: zhpanvip@outlook.com
  */
+@AutoService(Processor.class)
 public class AutoLoaderProcessor extends AbstractProcessor {
     private Types typeUtils;
     private Filer filer;
@@ -31,6 +34,7 @@ public class AutoLoaderProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         Logger.setMessager(processingEnv.getMessager());
+        Logger.i("AutoLoaderProcessor init");
         typeUtils = processingEnv.getTypeUtils();
         filer = processingEnv.getFiler();
         elementUtils = processingEnv.getElementUtils();
@@ -52,13 +56,18 @@ public class AutoLoaderProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         try {
+            Set<? extends Element> elementsAnnotatedWith = roundEnvironment.getElementsAnnotatedWith(AutoLoader.class);
+            Logger.i("elementsAnnotatedWith size %s",elementsAnnotatedWith.size());
             for (Element annotatedElement : roundEnvironment.getElementsAnnotatedWith(AutoLoader.class)) {
                 // AutoLoader 注解的对象必须是 Class 类型
                 if (annotatedElement.getKind() != ElementKind.CLASS) {
                     throw new ProcessingException(annotatedElement, "Only classes can be annotated with @%s", AutoLoader.class.getSimpleName());
                 }
                 TypeElement typeElement = (TypeElement) annotatedElement;
-                AutoLoaderAnnotationClass autoLoaderAnnotationClass = new AutoLoaderAnnotationClass(typeElement);
+                AutoLoaderAnnotationClass autoLoaderAnnotationClass = new AutoLoaderAnnotationClass(typeElement,elementUtils);
+                Logger.i("packageName:"+autoLoaderAnnotationClass.getAutoLoaderValuePackageName());
+                Logger.i("className:"+autoLoaderAnnotationClass.getAutoLoaderValueCanonicalName());
+                Logger.i("qualified:"+autoLoaderAnnotationClass.getQualifiedName());
             }
         } catch (ProcessingException e) {
             Logger.e(e.getElement(), e.getMessage());

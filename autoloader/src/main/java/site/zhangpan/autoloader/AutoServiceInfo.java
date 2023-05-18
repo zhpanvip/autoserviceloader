@@ -15,6 +15,6 @@ public class AutoServiceInfo {
 
     static {
         map.put("site.zhangpan.demo.autoloader.test.ITest", "site.zhangpan.demo.autoloader.generate.TestManager");
-        map.put("site.zhangpan.demo.autoloader.test.IStrategy", "site.zhangpan.demo.autoloader.generate.StrategyManager");
+        map.put("site.zhangpan.demo.autoloader.strategy.IStrategy", "site.zhangpan.demo.autoloader.generate.StrategyManager");
     }
 }

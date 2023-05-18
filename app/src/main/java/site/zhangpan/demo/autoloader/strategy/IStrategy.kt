@@ -1,4 +1,4 @@
-package site.zhangpan.demo.autoloader.stratety
+package site.zhangpan.demo.autoloader.strategy
 
 /**
  * @Description:

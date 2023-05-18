@@ -26,7 +26,15 @@ public class Logger {
         messager.printMessage(Diagnostic.Kind.ERROR, String.format(msg, args));
     }
 
+    public static void e(String msg) {
+        messager.printMessage(Diagnostic.Kind.ERROR,msg);
+    }
+
     public static void i(String msg, Object... args) {
         messager.printMessage(Diagnostic.Kind.NOTE, String.format(msg, args));
+    }
+
+    public static void i(String msg) {
+        messager.printMessage(Diagnostic.Kind.NOTE, msg);
     }
 }
